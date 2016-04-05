@@ -33,13 +33,27 @@ class Lubyfisbang::Scraper
 
   def get_meetups
     parse_meetups.each do |attributes|
-      Lubyfisbang::CLI.list_attribute_options(attributes)
+      menu = Lubyfisbang::Menu.new
+      menu.list_attribute_options(attributes)
       Lubyfisbang::Meetup.new(attributes)
       if attributes == "group"
         Lubyfisbang::GroupDetails.new(attributes)
       elsif attributes == "venue"
-        Lubyfisbang::VenueDetails.new(attribute_name.value)
+        Lubyfisbang::VenueDetails.new(attributes)
       end
     end
+  end
+
+  def get_pictures
+    Lubyfisbang::Meetup.list(event_url)
+    puts "Copy and paste the url of the meetup you want: "
+    input = gets.chomp
+    uri = URI(input)
+    urlname = uri.path.split('/')[1]
+    event_id = uri.path.split('/')[3]
+    url = "https://api.meetup.com/#{urlname}/events/#{event_id}/photos?key=#{get_api_key}&sign=true&photo-host=public"
+    results = @agent.get(url)
+    save = results.content
+    parsed_results = JSON.parse(save)
   end
 end

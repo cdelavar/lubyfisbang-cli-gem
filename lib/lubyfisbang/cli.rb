@@ -10,6 +10,15 @@ class Lubyfisbang::CLI
     binding.pry
     puts "\“Ed will help.\""
     options
+    puts "Would you like to do anything else? Yes or No"
+    input = gets.chomp.upcase
+    if input == "YES"
+      options
+    elsif input == "NO" 
+      puts "Your socks are coo-ool. Gotta wear 'em outside!"
+    else 
+      puts "Are you speaking Space Creature? Try typing again."
+      options
   end
 
   def options
@@ -20,6 +29,10 @@ class Lubyfisbang::CLI
     puts "4. List details about a meetup group"
     puts "5. List details about the meetup venue"
     puts "6. Find a meetup based on an attribute value."
+    get_user_input
+  end
+
+  def get_user_input
     input = gets.chomp.to_i
     case input
       when 1
@@ -36,6 +49,11 @@ class Lubyfisbang::CLI
       when 5
         Lubyfisbang::VenueDetails.print_all_meetups
       when 6
+        format_attribute_options
+        puts "Which attribute?"
+        attribute = gets.chomp
+        puts "What value?"
+        value = gets.chomp
         Lubyfisbang::Meetup.find_meetup(attribute, value)
     end
   end

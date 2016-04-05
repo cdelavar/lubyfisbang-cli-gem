@@ -33,6 +33,7 @@ class Lubyfisbang::Scraper
 
   def get_meetups
     parse_meetups.each do |attributes|
+      Lubyfisbang::CLI.list_attribute_options(attributes)
       Lubyfisbang::Meetup.new(attributes)
       if attributes == "group"
         Lubyfisbang::GroupDetails.new(attributes)

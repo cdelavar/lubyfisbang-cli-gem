@@ -3,7 +3,7 @@ class Lubyfisbang::Meetup
   @@all = []
 
   def initialize(attributes)
-    attributes.each do |attribute_name, attribute_value|
+      attributes.each do |attribute_name, attribute_value|
       self.class.send(:define_method, "#{attribute_name}=".to_sym) do |value|
         instance_variable_set("@" + attribute_name.to_s, value)
       end
@@ -16,24 +16,30 @@ class Lubyfisbang::Meetup
 
     end 
     @@all << self
+    Lubyfisbang::CLI.list_attribute_options(attributes)
   end
   
   def self.all
     @@all
   end
 
+  def print_all_meetups
+    @@all.each {|item| puts "#{item}"}
+  end
+
   def order_by_date_new_to_old
-    Lubyfisbang::Meetup.all.sort do |i, x|
+    self.all.sort do |i, x|
       Time.at(x.time) <=> Time.at(i.time)
     end
+    self.each {|item| puts "#{item}"}
   end
 
   def list(attribute)
-    array = Lubyfisbang::Meetup.all.collect {|i| i.attribute}
-    array.uniq
+    array = self.all.collect {|i| i.attribute}
+    array.uniq.each {|item| puts "#{item}"}
   end
 
-  def self.find(attribute, value)
+  def find_meetup(attribute, value)
     self.all.detect {|i| i.attribute.include?(value)}
     #Meetup.all.detect {|i| i.name == "Happy Hour @ Lexington Club"} works
   end

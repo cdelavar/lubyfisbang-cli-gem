@@ -22,8 +22,6 @@ class Lubyfisbang::Meetup
     @@all
   end
 
-  
-
   def self.print_all_meetups
     array = []
     self.all.each do |attribute|
@@ -48,15 +46,12 @@ class Lubyfisbang::Meetup
     puts output
   end
 
-  def self.list(attribute)
-    self.all.collect {|i| i.attribute}
-    self.uniq.each {|item| puts "#{item}"}
-  end
-
   def self.find_meetup(attribute, value)
-    self.all.detect {|i| i.attribute.include?(value)}
-    #Meetup.all.detect {|i| i.name == "Happy Hour @ Lexington Club"} works
+    binding.pry
+    meetup = Lubyfisbang::Menu.all.detect {|meetup| meetup[attribute].include?(value)}
+    meetup["description"] = meetup["description"].gsub(%r{</?[^>]+?>}, '')
+    output = meetup.to_yaml({:indentation => 3, :line_width => -1})
+    puts output
   end
-
 
 end

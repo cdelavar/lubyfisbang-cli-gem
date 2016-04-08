@@ -2,6 +2,10 @@ class Lubyfisbang::Menu
 
   @@all = []
 
+  def self.all
+    @@all
+  end
+
   def get_attribute_options(attributes)
     @@all << attributes
   end
@@ -13,20 +17,10 @@ class Lubyfisbang::Menu
     end
   end
 
-  #def self.print_attribute_options
-    #self.all.each do |option|
-    #  puts "#{option}"
-    #end
- # end
-
-  def self.all
-    @@all
-  end
-
   def self.menu_user_choice(attribute)
     self.all.each_with_index do |meetup, index|
       puts "#{index+1}. #{meetup[attribute]}"
     end
   end
-  
+
 end

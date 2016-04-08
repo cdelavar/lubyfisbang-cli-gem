@@ -7,13 +7,16 @@ class Lubyfisbang::VenueDetails < Lubyfisbang::Meetup
   end
   
   def self.all
-    @@venue_details[0] 
+    @@venue_details 
   end
 
   def self.print_all_venue_details
-    self.all.each do |attribute, value|
-      puts "#{attribute}: #{value}"
+    array = []
+    self.all.each do |attribute|
+      array << attribute
     end
+    output = array.to_yaml({:indentation => 3, :line_width => -1})
+    puts output
   end
   
 end

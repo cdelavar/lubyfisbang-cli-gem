@@ -29,7 +29,7 @@ class Lubyfisbang::CLI
     puts "3. List details of a single attribute for all meetups"
     puts "4. List details about a meetup group"
     puts "5. List details about the meetup venue"
-    puts "6. Find a meetup based on an attribute value."
+    puts "6. Find a meetup based on an attribute value"
     puts "7. Find pictures from a meetup"
   end
 
@@ -50,7 +50,7 @@ class Lubyfisbang::CLI
       when 5
         Lubyfisbang::VenueDetails.print_all_venue_details
       when 6
-        Lubyfisbang::Menu.print_attribute_options
+        Lubyfisbang::Menu.list_attribute_options
         puts "Which attribute?"
         attribute = gets.chomp
         puts "What value?"

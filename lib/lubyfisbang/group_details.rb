@@ -3,16 +3,17 @@ class Lubyfisbang::GroupDetails < Lubyfisbang::Meetup
   @@group_details = []
 
   def initialize(attributes)
+    binding.pry
     @@group_details << attributes
   end
   
-  def self.all
+  def self.group_details
     @@group_details 
   end
 
   def self.print_all_group_details
     array = []
-    self.all.each do |attribute|
+    self.group_details.each do |attribute|
       array << attribute
     end
     output = array.to_yaml({:indentation => 3, :line_width => -1})

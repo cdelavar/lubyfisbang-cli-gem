@@ -52,6 +52,7 @@ class Lubyfisbang::Scraper
     uri = URI(input)
     urlname = uri.path.split('/')[1]
     event_id = uri.path.split('/')[3]
+    sign_in
     url = "https://api.meetup.com/#{urlname}/events/#{event_id}/photos?key=#{get_api_key}&sign=true&photo-host=public"
     results = @agent.get(url)
     save = results.content

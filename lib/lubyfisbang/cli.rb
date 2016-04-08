@@ -6,19 +6,21 @@ class Lubyfisbang::CLI
     puts "Welcome to the Meetup Helper."
     Lubyfisbang::Scraper.new.get_meetups
     puts "\“Ed will help.\""
+    session
+  end
     
+  def session
     options
     get_user_input
     puts "Would you like to do anything else? Yes or No"
-
     input = gets.chomp.upcase
-    if input == "YES"
-      options
-    elsif input == "NO" 
+    if input == "YES" 
+      session
+    elsif input == "NO"
       puts "Your socks are coo-ool. Gotta wear 'em outside!"
     else 
       puts "Are you speaking Space Creature? Try typing again."
-      options
+      session
     end
   end
 

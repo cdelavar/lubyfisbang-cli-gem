@@ -2,15 +2,31 @@ class Lubyfisbang::Menu
 
   @@all = []
 
-  def list_attribute_options(attributes)
-    attributes.each do |attribute|
-      @@all << attribute
+  def get_attribute_options(attributes)
+    @@all << attributes
+  end
+
+  def self.list_attribute_options
+    attribute_keys = @@all[0].keys
+    attribute_keys.each do |key|
+      puts "#{key}"
     end
   end
 
-  def print_attribute_options
-    @@all.each do |option|
-      puts "#{option}"
+  #def self.print_attribute_options
+    #self.all.each do |option|
+    #  puts "#{option}"
+    #end
+ # end
+
+  def self.all
+    @@all
+  end
+
+  def self.menu_user_choice(attribute)
+    self.all.each_with_index do |meetup, index|
+      puts "#{index+1}. #{meetup[attribute]}"
     end
   end
+  
 end

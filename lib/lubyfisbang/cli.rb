@@ -38,18 +38,17 @@ class Lubyfisbang::CLI
     case input
       when 1
         Lubyfisbang::Meetup.print_all_meetups
-        binding.pry
       when 2
         Lubyfisbang::Meetup.order_by_date_new_to_old
       when 3
-        Lubyfisbang::Menu.print_attribute_options
+        Lubyfisbang::Menu.list_attribute_options
         puts "Which attribute would you like to see deatils about?"
-        atribute = gets.chomp
-        Lubyfisbang::Meetup.list(attribute)
+        attribute = gets.chomp
+        Lubyfisbang::Menu.menu_user_choice(attribute)
       when 4
-        Lubyfisbang::GroupDetails.print_all_meetups
+        Lubyfisbang::GroupDetails.print_all_group_details
       when 5
-        Lubyfisbang::VenueDetails.print_all_meetups
+        Lubyfisbang::VenueDetails.print_all_venue_details
       when 6
         Lubyfisbang::Menu.print_attribute_options
         puts "Which attribute?"

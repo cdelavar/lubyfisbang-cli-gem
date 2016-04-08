@@ -32,14 +32,14 @@ class Lubyfisbang::Scraper
     
 
   def get_meetups
+    menu = Lubyfisbang::Menu.new
     parse_meetups.each do |attributes|
-      menu = Lubyfisbang::Menu.new
-      menu.list_attribute_options(attributes)
+      menu.get_attribute_options(attributes)
       Lubyfisbang::Meetup.new(attributes)
-      if attributes == "group"
-        Lubyfisbang::GroupDetails.new(attributes)
-      elsif attributes == "venue"
-        Lubyfisbang::VenueDetails.new(attributes)
+      if attributes["group"]
+        Lubyfisbang::GroupDetails.new(attributes["group"])
+      elsif attributes["venue"]
+        Lubyfisbang::VenueDetails.new(attributes["venue"])
       end
     end
   end

@@ -22,22 +22,35 @@ class Lubyfisbang::Meetup
     @@all
   end
 
+  
+
   def self.print_all_meetups
+    array = []
     self.all.each do |attribute|
-      puts attribute.to_yaml({:indentation => 3, :line_width => -1})
+      if attribute.description
+        attribute.description = attribute.description.gsub(%r{</?[^>]+?>}, '')
+      end
+        array << attribute
     end
+    output = array.to_yaml({:indentation => 3, :line_width => -1})
+    puts output
   end
 
   def self.order_by_date_new_to_old
-    self.all.sort do |i, x|
-      Time.at(x.time) <=> Time.at(i.time)
+    array = []
+    self.all.each do |attribute|
+      if attribute.description
+        attribute.description = attribute.description.gsub(%r{</?[^>]+?>}, '')
+      end
+        array << attribute
     end
-    self.each {|item| puts "#{item}"}
+    output = array.reverse.to_yaml({:indentation => 3, :line_width => -1})
+    puts output
   end
 
   def self.list(attribute)
-    array = self.all.collect {|i| i.attribute}
-    array.uniq.each {|item| puts "#{item}"}
+    self.all.collect {|i| i.attribute}
+    self.uniq.each {|item| puts "#{item}"}
   end
 
   def self.find_meetup(attribute, value)
